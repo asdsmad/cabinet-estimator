@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@supabase/supabase-js": "^2.105.1",
     "framer-motion": "^12.10.5",
     "lucide-react": "^0.511.0",
     "react": "^18.3.1",
