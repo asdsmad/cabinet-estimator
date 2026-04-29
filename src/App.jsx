@@ -352,7 +352,7 @@ function HomePage({
             <div className="subtitle">Custom Cabinetry • Millwork • Customer Inquiry Portal</div>
           </div>
           <div className="top-contact">
-            <span><Phone size={14} /> (929) 000-0000</span>
+            <span><Phone size={14} /> (929) 460-4610</span>
             <span><Mail size={14} /> info@unitedbw.com</span>
           </div>
         </div>
