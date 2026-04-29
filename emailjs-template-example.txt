@@ -1,0 +1,23 @@
+Subject:
+New inquiry from {{customer_name}}
+
+Body:
+You received a new website inquiry.
+
+Client Name: {{customer_name}}
+Company / Builder: {{company_name}}
+Phone Number: {{customer_phone}}
+Email Address: {{customer_email}}
+Sales: {{sales_name}}
+Project Address: {{project_address}}
+City / State: {{city_state}}
+
+Project Type: {{project_type}}
+Preferred Timeline: {{timeline}}
+
+Material Family: {{material_family}}
+Style Series: {{style_series}}
+Door Style: {{door_style}}
+Finish / Color Preference: {{finish_color}}
+
+Submitted At: {{submitted_at}}
