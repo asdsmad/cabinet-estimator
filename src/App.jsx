@@ -45,9 +45,9 @@ const veneerImages = import.meta.glob("./assets/styles/veneer/*.{jpg,png,jpeg}",
 
 // const inquiryId = `EST-${new Date().toISOString().slice(2, 10).replace(/-/g, '')}-${Math.floor(1000 + Math.random() * 9000)}`;
 
-const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const EMAILJS_TEMPLATE_ID  = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const modificationColumnMap = {
   Melamine: "A",
@@ -98,7 +98,9 @@ const salesEmailMap = {
 };
 
 function AdminPage() {
-  const [authorized, setAuthorized] = useState(false);
+  const [authorized, setAuthorized] = useState(
+    localStorage.getItem("adminAuthorized") === "true"
+  );
   const [password, setPassword] = useState("");
   const [data, setData] = useState([]);
 
@@ -131,7 +133,8 @@ function AdminPage() {
         />
         <button
           onClick={() => {
-            if (password === "123456") {
+            if (password === "159753") {
+              localStorage.setItem("adminAuthorized", "true");
               setAuthorized(true);
             } else {
               alert("Wrong password");
@@ -147,7 +150,21 @@ function AdminPage() {
   return (
     <div style={{ padding: "20px" }}>
       <h2>Inquiry Records</h2>
-
+      <button
+        onClick={() => {
+          localStorage.removeItem("adminAuthorized");
+          setAuthorized(false);
+        }}
+        style={{
+          padding: "6px 12px",
+          borderRadius: "6px",
+          border: "1px solid #ccc",
+          background: "#fff",
+          cursor: "pointer"
+        }}
+      >
+        Logout
+      </button>
       {data.map((item) => (
         <div
           key={item.id}
@@ -1526,7 +1543,7 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path="/admin" element={<AdminPage />} />
+      <Route path="/admin-ubw-9328" element={<AdminPage />} />
       <Route
         path="/"
         element={
