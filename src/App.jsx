@@ -898,7 +898,7 @@ function HomePage({
                       <div key={item.id} className="cabinet-row">
                         <div>
                           <div>
-                            {index + 1}. {item.type} / {item.category} / {item.group} / {item.model} / Qty {item.qty} / ${calculateItemPrice(item, priceDataMap[item.type] || [])}
+                            {index + 1}. {item.type} / {item.category} / {item.group} / {item.model} / Qty {item.qty} / ${formatMoney(calculateItemPrice(item, priceDataMap[item.type] || []))}
 
                             {item.customType === "larger" && (
                               <div style={{ color: "#007bff", fontSize: "12px", marginTop: "4px" }}>
@@ -969,20 +969,20 @@ function HomePage({
                   <div className="total-summary">
                     <div className="summary-row">
                       <span>Cabinets</span>
-                      <strong>${breakdown.cabinets}</strong>
+                      <strong>${formatMoney(breakdown.cabinets)}</strong>
                     </div>
 
                     <div className="summary-row">
                       <span>Accessories</span>
-                      <strong>${breakdown.accessories}</strong>
+                      <strong>${formatMoney(breakdown.accessories)}</strong>
                     </div>
                     <div className="summary-row">
                       <span>Modifications</span>
-                      <strong>${breakdown.modifications}</strong>
+                      <strong>${formatMoney(breakdown.modifications)}</strong>
                     </div>
                     <div className="summary-total">
                       <span>Total</span>
-                      <strong>${breakdown.total}</strong>
+                      <strong>${formatMoney(breakdown.total)}</strong>
                     </div>
                   </div>
                 )}
@@ -1019,10 +1019,10 @@ function HomePage({
 
             <div className="price-box">
               <div className="small-muted">Customer Inquiry Preview</div>
-              <div className="price" style={{ fontSize: "28px" }}>${totalPrice || 0}</div>
-              <div className="help-text">
+              <div className="price" style={{ fontSize: "28px" }}>${formatMoney(totalPrice) || 0}</div>
+              {/* <div className="help-text">
                 This version focuses on collecting customer information, project type, and style preferences before you prepare a formal quote.
-              </div>
+              </div> */}
             </div>
 
             <div className="info-box">
@@ -1093,10 +1093,17 @@ const priceColumnMap = {
 
 function getPriceColumn(item) {
   if (item.type === "accessory") {
-    return item.materialFamily;
+    if (item.materialFamily === "Melamine") return "A";
+    if (item.materialFamily === "PETG") return "B";
+    if (item.materialFamily === "Veneer") return "C";
+    return null;
   }
 
   return priceColumnMap[item.priceTier]?.[item.materialFamily] || null;
+}
+
+function formatMoney(value) {
+  return Number(value || 0).toFixed(2);
 }
 
 function calculateItemPrice(item, priceRows) {
@@ -1426,7 +1433,7 @@ export default function App() {
             const price = calculateItemPrice(item, priceDataMap[item.type] || []);
 
             const baseLine = `${index + 1}. ${typeMap[item.type] || item.type
-              } / ${item.category} / ${item.group} / ${item.model} / Qty ${item.qty} / $${price}`;
+              } / ${item.category} / ${item.group} / ${item.model} / Qty ${item.qty} / $${formatMoney(price)}`;
 
             let customLine = "";
 
@@ -1475,8 +1482,8 @@ export default function App() {
             `Finish / Color: ${finishColor}`,
             `Cabinet List:`,
             ...lines,
-            `Group Total: $${groupTotal}`,
-
+            `Group Total: $${formatMoney(groupTotal)}`,
+            
           ].join("\n");
         })
         .join("\n\n");
@@ -1491,6 +1498,7 @@ export default function App() {
         p_project_type: projectNames[form.projectType],
         p_timeline: form.timeline,
         p_cabinet_groups: groupedCabinetsText,
+        total_estimate: formatMoney(totalPrice),
       });
       if (error) {
         console.error(error);
