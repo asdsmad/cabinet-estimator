@@ -1499,7 +1499,6 @@ export default function App() {
         p_timeline: form.timeline,
         p_cabinet_groups: groupedCabinetsText,
         p_total_estimate: formatMoney(totalPrice),
-        total_estimate: formatMoney(totalPrice),
       });
       if (error) {
         console.error(error);
