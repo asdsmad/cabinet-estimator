@@ -564,24 +564,15 @@ const modificationRows =
     "Category": "finished_interior",
     "Group": "base",
     "Model": "FIB",
-    "A": 1000,
-    "B": 1000,
-    "C": 1000
+    "A": 700,
+    "B": 700,
+    "C": 700,
   },
   {
     "CabinetType": "modification",
     "Category": "finished_interior",
     "Group": "vanity",
     "Model": "FIV",
-    "A": 900,
-    "B": 900,
-    "C": 900
-  },
-  {
-    "CabinetType": "modification",
-    "Category": "finished_interior",
-    "Group": "wall",
-    "Model": "FIW",
     "A": 700,
     "B": 700,
     "C": 700
@@ -589,11 +580,20 @@ const modificationRows =
   {
     "CabinetType": "modification",
     "Category": "finished_interior",
+    "Group": "wall",
+    "Model": "FIW",
+    "A": 500,
+    "B": 500,
+    "C": 500
+  },
+  {
+    "CabinetType": "modification",
+    "Category": "finished_interior",
     "Group": "tall",
     "Model": "FIT",
-    "A": 1800,
-    "B": 1800,
-    "C": 1800
+    "A": 1500,
+    "B": 1500,
+    "C": 1500
   }
 ];
 export default modificationRows;

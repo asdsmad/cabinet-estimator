@@ -38,12 +38,25 @@ import {
   Calculator,
 } from "lucide-react";
 
+const cabinetImages = import.meta.glob("./assets/cabinet-images/*.{jpg,png,jpeg}", {
+  eager: true,
+});
+
+const cabinetImageMap = Object.fromEntries(
+  Object.entries(cabinetImages).map(([path, mod]) => {
+    const fileName = path.split("/").pop().split(".")[0];
+    return [fileName, mod.default];
+  })
+);
+
 const melamineImages = import.meta.glob("./assets/styles/melamine/*.{jpg,png,jpeg}", { eager: true });
 const petgImages = import.meta.glob("./assets/styles/petg/*.{jpg,png,jpeg}", { eager: true });
 const lacquerImages = import.meta.glob("./assets/styles/lacquer/*.{jpg,png,jpeg}", { eager: true });
 const veneerImages = import.meta.glob("./assets/styles/veneer/*.{jpg,png,jpeg}", { eager: true });
 
 // const inquiryId = `EST-${new Date().toISOString().slice(2, 10).replace(/-/g, '')}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+
 
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -343,6 +356,24 @@ function HomePage({
   ];
 
 
+  const normalize = (str = "") =>
+    str.toLowerCase().replace(/\s+/g, "-");
+
+  const cleanCategory = cabinetForm.category.includes("high")
+  ? "high"
+  : cabinetForm.category;
+
+const groupKey =
+  `${normalize(cabinetForm.type)}_${normalize(cleanCategory)}_${normalize(cabinetForm.group)}`;
+
+const categoryKey =
+  `${normalize(cabinetForm.type)}_${normalize(cleanCategory)}`;
+
+  const selectedCabinetImage =
+    cabinetImageMap[groupKey] ||
+    cabinetImageMap[categoryKey];
+
+
   return (
     <div className="page">
       <header className="topbar">
@@ -639,7 +670,8 @@ function HomePage({
                       ))}
                     </select>
                   </div>
-
+{/* <div>{groupKey}</div>
+<div>{categoryKey}</div> */}
                   <div>
                     <label>Model</label>
                     <select
@@ -651,6 +683,22 @@ function HomePage({
                         <option key={item} value={item}>{item}</option>
                       ))}
                     </select>
+                    {selectedCabinetImage && (
+                      <div style={{ marginTop: "16px", textAlign: "center" }}>
+                        <img
+                          src={selectedCabinetImage}
+                          alt="Cabinet Preview"
+                          style={{
+                            width: "260px",
+                            maxWidth: "100%",
+                            border: "1px solid #ddd",
+                            borderRadius: "10px",
+                            background: "#fff",
+                            padding: "8px",
+                          }}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
                 {/* Quantity + Custom */}
@@ -852,9 +900,13 @@ function HomePage({
                               <option key={model} value={model}>{model}</option>
                             ))}
                           </select>
+
+
                         </div>
                       )}
+
                     </div>
+
 
                     <div className="mod-item">
                       <label>
@@ -1483,7 +1535,7 @@ export default function App() {
             `Cabinet List:`,
             ...lines,
             `Group Total: $${formatMoney(groupTotal)}`,
-            
+
           ].join("\n");
         })
         .join("\n\n");

@@ -1913,10 +1913,10 @@ const accessoryRows =
     "Type": "accessory",
     "Category": "molding",
     "Group": "Subrail",
-    "Model": "MSUB94\t478",
-    "A": 492,
-    "B": 520,
-    "C": ""
+    "Model": "MSUB94",
+    "A": 478,
+    "B": 492,
+    "C": 520
   },
   {
     "Type": "accessory",
