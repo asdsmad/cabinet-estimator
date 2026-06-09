@@ -1850,30 +1850,6 @@ const baseRows =
   },
   {
     "CabinetType": "Base",
-    "Category": "diagonal-corner",
-    "Group": "with-lazy-susan",
-    "Model": "BCDLS3333",
-    "A": 1193,
-    "B": 1264,
-    "C": 1404,
-    "D": 1544,
-    "E": 1825,
-    "F": 2007
-  },
-  {
-    "CabinetType": "Base",
-    "Category": "diagonal-corner",
-    "Group": "with-lazy-susan",
-    "Model": "BCDLS3636",
-    "A": 1495,
-    "B": 1583,
-    "C": 1759,
-    "D": 1935,
-    "E": 2287,
-    "F": 2516
-  },
-  {
-    "CabinetType": "Base",
     "Category": "blind",
     "Group": "left-blind",
     "Model": "BBL36L",

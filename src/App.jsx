@@ -569,7 +569,7 @@ const categoryKey =
                       value={form.doorStyle}
                       onChange={(e) => update("doorStyle", e.target.value)}
                     >
-                      <option value="Flat Panel">Flat Panel</option>
+                      <option value="Slab Panel">Slab Panel</option>
                       <option value="Shaker">Shaker</option>
                     </select>
                   </div>
@@ -582,7 +582,7 @@ const categoryKey =
                     >
                       {(finishOptionsMap[form.style] || [])
                         .filter((color) => {
-                          if (form.doorStyle === "Flat Panel") return true;
+                          if (form.doorStyle === "Slab Panel") return true;
                           return (shakerAvailableMap[form.style] || []).includes(color);
                         })
                         .map((item) => (
@@ -600,7 +600,7 @@ const categoryKey =
                   <div className="style-grid-inline">
                     {(styleCards[form.style] || [])
                       .filter((item) => {
-                        if (form.doorStyle === "Flat Panel") return true;
+                        if (form.doorStyle === "Slab Panel") return true;
                         return (shakerAvailableMap[form.style] || []).includes(item.name);
                       })
                       .map((item) => (
@@ -1219,7 +1219,7 @@ export default function App() {
     timeline: "Within 1-2 months",
     priceTier: "Euro Economy",
     style: "melamine",
-    doorStyle: "Flat Panel",
+    doorStyle: "Slab Panel",
     finishColor: finishOptionsMap.melamine?.[0] || "",
     sales: "No preference",
   });
@@ -1344,7 +1344,7 @@ export default function App() {
       const nextStyle = selectedStyle || prev.style;
 
       const validColors = (finishOptionsMap[nextStyle] || []).filter((c) => {
-        if (prev.doorStyle === "Flat Panel") return true;
+        if (prev.doorStyle === "Slab Panel") return true;
         return (shakerAvailableMap[nextStyle] || []).includes(c);
       });
 
@@ -1383,7 +1383,7 @@ export default function App() {
       timeline: "Within 1-2 months",
       priceTier: "Euro Economy",
       style: "melamine",
-      doorStyle: "Flat Panel",
+      doorStyle: "Slab Panel",
       finishColor: finishOptionsMap.melamine?.[0] || "",
       sales: "No preference",
     });
